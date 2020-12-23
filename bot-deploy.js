@@ -1,4 +1,8 @@
 "use strict";
+const ViberBot = require('viber-bot').Bot;
+const BotEvents = require('viber-bot').Events;
+
+const bot = new ViberBot()
 
 let prompt = require("prompt");
 let colors = require("colors/safe");
@@ -9,6 +13,11 @@ let randomBotNames = moniker.generator([moniker.verb, moniker.noun], {
 	maxSize: 10,
 	encoding: 'utf-8',
 	glue: '-'
+});
+
+bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
+	// Echo's back the message to the client. Your bot logic should sit here.
+	response.send(message);
 });
 
 function deployToHeroku(accessToken) {
